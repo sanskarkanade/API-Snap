@@ -46,3 +46,41 @@ exports.deleteProject = async (req, res) => {
     res.status(500).json({ message: 'Delete failed', error: err.message });
   }
 };
+
+exports.addEndpoint = async (req, res) => {
+  const { id } = req.params;
+  const { method, path, description } = req.body;
+
+  try {
+    const project = await Project.findById(id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
+
+    project.endpoints.push({ method, path, description });
+    await project.save();
+
+    res.status(200).json(project);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to add endpoint", error: err.message });
+  }
+};
+
+exports.deleteEndpoint = async (req, res) => {
+  const { id, index } = req.params;
+
+  try {
+    const project = await Project.findById(id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
+
+    if (!project.endpoints[index]) {
+      return res.status(404).json({ message: "Endpoint not found" });
+    }
+
+    project.endpoints.splice(index, 1); // remove 1 item at the index
+    await project.save();
+
+    res.status(200).json({ message: "Endpoint deleted", project });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete endpoint", error: err.message });
+  }
+};
+
