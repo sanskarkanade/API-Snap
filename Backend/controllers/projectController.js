@@ -84,3 +84,46 @@ exports.deleteEndpoint = async (req, res) => {
   }
 };
 
+exports.editEndpoint = async (req, res) => {
+  const { id, index } = req.params;
+  const { method, path, description } = req.body;
+
+  try {
+    const project = await Project.findById(id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
+
+    if (!project.endpoints[index]) {
+      return res.status(404).json({ message: "Endpoint not found" });
+    }
+
+    // Update fields
+    project.endpoints[index].method = method;
+    project.endpoints[index].path = path;
+    project.endpoints[index].description = description;
+
+    await project.save();
+    res.status(200).json(project);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to edit endpoint", error: err.message });
+  }
+};
+
+exports.saveTestHistory = async (req, res) => {
+  const { id, index } = req.params;
+  const { status, responseBody } = req.body;
+
+  try {
+    const project = await Project.findById(id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
+
+    const endpoint = project.endpoints[index];
+    if (!endpoint) return res.status(404).json({ message: "Endpoint not found" });
+
+    endpoint.history.push({ status, responseBody });
+    await project.save();
+
+    res.status(200).json({ message: "History saved" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to save history", error: err.message });
+  }
+};

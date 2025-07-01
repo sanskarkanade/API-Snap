@@ -7,7 +7,9 @@ const {
   getProjectById,
   deleteProject,
   addEndpoint,
-  deleteEndpoint
+  deleteEndpoint,
+  editEndpoint,
+  saveTestHistory
 } = require('../controllers/projectController');
 
 router.post('/', protect, createProject);
@@ -16,6 +18,10 @@ router.get('/:id', protect, getProjectById);
 router.delete('/:id', protect, deleteProject);
 router.post("/:id/endpoints", protect, addEndpoint);
 router.delete("/:id/endpoints/:index", protect, deleteEndpoint);
+router.put("/:id/endpoints/:index", protect, editEndpoint);
+router.post("/:id/endpoints/:index/history", protect, saveTestHistory);
+
+
 
 
 

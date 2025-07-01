@@ -96,112 +96,116 @@ const Home = () => {
     fetchProjects();
   }, []);
 
-  return (
-    <>
-      <Navbar />
-      <div className="min-h-screen bg-gray-50 p-8">
-        <header className="mb-10">
-          <h1 className="text-3xl font-bold text-blue-700">Welcome back, Developer 👋</h1>
-          <p className="text-gray-600">Manage your projects and APIs all in one place.</p>
-        </header>
+ // Replace your entire return (...) block with this version
+ return (
+<>
+  <Navbar />
+  <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white px-6 py-12">
+    <header className="mb-12 text-center">
+      <h1 className="text-4xl font-extrabold text-blue-700">Welcome back, Developer 👋</h1>
+      <p className="text-gray-600 mt-2">Manage your projects and APIs all in one place.</p>
+    </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-xl shadow-md col-span-2">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Projects</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {/* Projects List */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg col-span-2">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Recent Projects</h2>
 
-            {loading ? (
-              <p className="text-gray-500">Loading projects...</p>
-            ) : projects.length > 0 ? (
-              <ul className="space-y-4">
-                {projects.map((project) => (
-                  <li
-                    key={project._id}
-                    className="flex justify-between items-center border-b pb-2"
-                  >
-                    <div>
-                      <Link
-                        to={`/project/${project._id}`}
-                        className="font-medium text-blue-600 hover:underline"
-                      >
-                        {project.name}
-                      </Link>
-                      <p className="text-sm text-gray-500">
-                        Last updated:{" "}
-                        {new Date(project.updatedAt).toLocaleDateString()}
-                      </p>
-                    </div>
-
-                    <button
-                      onClick={() => handleDelete(project._id)}
-                      className="text-sm text-red-600 hover:underline"
-                    >
-                      🗑️ Delete
-                    </button>
-                  </li>
-                ))}
-              </ul>
-
-            ) : (
-              <p className="text-gray-500">No projects found.</p>
-            )}
-          </div>
-
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h2>
-            <div className="flex flex-col space-y-4">
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+        {loading ? (
+          <p className="text-gray-500">Loading projects...</p>
+        ) : projects.length > 0 ? (
+          <ul className="space-y-5">
+            {projects.map((project) => (
+              <li
+                key={project._id}
+                className="flex justify-between items-start border-b pb-4"
               >
-                ➕ New Project
-              </button>
-              {showForm && (
-                <form onSubmit={handleCreateProject} className="mt-6 space-y-4">
-                  {error && <p className="text-red-500 text-sm">{error}</p>}
-
-                  <input
-                    type="text"
-                    placeholder="Project name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full p-2 border rounded"
-                    required
-                  />
-
-                  <textarea
-                    placeholder="Description (optional)"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-full p-2 border rounded"
-                  />
-
-                  <button
-                    type="submit"
-                    className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+                <div>
+                  <Link
+                    to={`/project/${project._id}`}
+                    className="text-lg font-medium text-blue-600 hover:underline"
                   >
-                    Create
-                  </button>
-                </form>
+                    {project.name}
+                  </Link>
+                  <p className="text-sm text-gray-500">
+                    Last updated:{" "}
+                    {new Date(project.updatedAt).toLocaleDateString()}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => handleDelete(project._id)}
+                  className="text-sm text-red-600 hover:underline mt-1"
+                >
+                  🗑️ Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500">No projects found. Create your first one ➕</p>
+        )}
+      </div>
+
+      {/* Quick Actions / Form */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Quick Actions</h2>
+
+        <div className="flex flex-col gap-4">
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium"
+          >
+            ➕ New Project
+          </button>
+
+          {showForm && (
+            <form onSubmit={handleCreateProject} className="bg-blue-50 border border-blue-100 rounded-lg p-4 space-y-4">
+              {error && (
+                <p className="text-red-600 text-sm">{error}</p>
               )}
 
+              <input
+                type="text"
+                placeholder="Project name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                required
+              />
+
+              <textarea
+                placeholder="Description (optional)"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              />
 
               <button
-                onClick={() => navigate("/settings")}
-                className="bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200"
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold"
               >
-                ⚙️ Settings
+                Create Project
               </button>
+            </form>
+          )}
 
-            </div>
-          </div>
+          <button
+            onClick={() => navigate("/settings")}
+            className="bg-gray-100 text-gray-800 py-2 rounded-lg hover:bg-gray-200 font-medium"
+          >
+            ⚙️ Account Settings
+          </button>
         </div>
-
-        <footer className="mt-16 text-center text-sm text-gray-400">
-          © 2025 API Snap. All rights reserved.
-        </footer>
       </div>
-    </>
-  );
-};
+    </div>
+
+    <footer className="mt-20 text-center text-sm text-gray-400">
+      © 2025 API Snap. Built with ❤️ for developers.
+    </footer>
+  </div>
+</>
+)};
+
 
 export default Home;

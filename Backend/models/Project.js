@@ -7,16 +7,21 @@ const projectSchema = new mongoose.Schema(
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     endpoints: [
       {
-        method: {
-          type: String,
-          enum: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-          required: true,
-        },
-        path: { type: String, required: true },
+        method: String,
+        path: String,
         description: String,
         mockResponse: Object,
-      },
+
+        history: [
+          {
+            status: Number,
+            timestamp: { type: Date, default: Date.now },
+            responseBody: mongoose.Schema.Types.Mixed
+          }
+        ]
+      }
     ],
+
   },
   { timestamps: true }
 );

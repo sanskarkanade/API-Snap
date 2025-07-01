@@ -30,13 +30,16 @@ const Docs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="w-64 bg-blue-50 p-6 border-r hidden md:block">
-        <h2 className="text-xl font-semibold text-blue-700 mb-6">Docs</h2>
-        <ul className="space-y-4 text-gray-700">
+      <aside className="md:w-64 bg-blue-50 border-r p-6 hidden md:block sticky top-0 h-screen">
+        <h2 className="text-xl font-bold text-blue-700 mb-6">📘 Docs</h2>
+        <ul className="space-y-3 text-gray-700">
           {sections.map((section, index) => (
-            <li key={index} className="hover:text-blue-600 cursor-pointer">
+            <li
+              key={index}
+              className="hover:text-blue-600 text-sm transition cursor-pointer"
+            >
               {section.title}
             </li>
           ))}
@@ -44,15 +47,20 @@ const Docs = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
-        <h1 className="text-4xl font-bold text-blue-700 mb-8">API Snap Documentation</h1>
+      <main className="flex-1 px-6 py-8 md:px-12">
+        <h1 className="text-4xl font-extrabold text-blue-700 mb-10">
+          API Snap Documentation
+        </h1>
+
         {sections.map((section, index) => (
-          <section key={index} className="mb-10">
+          <section key={index} className="mb-12">
             <h2 className="text-2xl font-semibold text-gray-800 mb-2">
               {section.title}
             </h2>
-            <p className="text-gray-600">{section.content}</p>
-            <hr className="mt-6 mb-4 border-gray-200" />
+            <p className="text-gray-600 leading-relaxed text-sm">
+              {section.content}
+            </p>
+            <hr className="mt-6 border-gray-200" />
           </section>
         ))}
       </main>
