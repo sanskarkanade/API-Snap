@@ -1,1 +1,63 @@
+# ------------------------------------
+# Node.js & General
+# ------------------------------------
+node_modules/
+.env
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ------------------------------------
+# Logs
+# ------------------------------------
+logs
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------------------
+# OS Generated Files
+# ------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ------------------------------------
+# VSCode Settings
+# ------------------------------------
+.vscode/
+
+# ------------------------------------
+# Frontend (React / Vite)
+# ------------------------------------
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.env
+Frontend/.next/           # if using Next.js
+Frontend/.parcel-cache/
+Frontend/build/           # if using CRA
+
+# ------------------------------------
+# Backend (Node.js / Express)
+# ------------------------------------
+Backend/node_modules/
 Backend/.env
+
+# Optional: if you build React into backend/public/
+Backend/public/
+
+# ------------------------------------
+# Git
+# ------------------------------------
+.git
+.gitignore
+
+# ------------------------------------
+# Other
+# ------------------------------------
+*.swp
+*.swo
