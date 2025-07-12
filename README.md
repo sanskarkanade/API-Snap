@@ -62,7 +62,7 @@ cd ../Backend
 npm install
 npm run dev
 
-```
+
 
 Create a .env in the Backend/ folder:
 
@@ -79,6 +79,8 @@ apisnap/
 ├── Backend/        # Express API + MongoDB
 
 ---
+
+```
 
 🙋‍♂️ Author
 Sanskar Kanade
