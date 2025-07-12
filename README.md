@@ -49,7 +49,7 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/apisnap.git
+git clone https://github.com/sanskarkanade/apisnap.git
 cd apisnap
 
 # Frontend setup
@@ -61,3 +61,29 @@ npm run dev
 cd ../Backend
 npm install
 npm run dev
+
+
+Create a .env in the Backend/ folder:
+
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/apisnap
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=7d
+PORT=5000
+
+---
+
+📁 Folder Structure
+apisnap/
+├── frontend/       # React UI
+├── Backend/        # Express API + MongoDB
+
+---
+
+🙋‍♂️ Author
+Sanskar Kanade
+
+[LinkedIn](https://www.linkedin.com/in/sanskar-kanade-585805322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+
+💼 Aspiring Full Stack Developer
+
+📫 Email: kanadesanskar79@gmail.com
