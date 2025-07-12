@@ -17,7 +17,7 @@ const Home = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:5000/api/projects", {
+      const res = await fetch("https://api-snap.onrender.com/api/projects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Home = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
+      const res = await fetch(`https://api-snap.onrender.com/api/projects/${projectId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ const Home = () => {
       if (!token) return;
 
       try {
-        const response = await fetch("http://localhost:5000/api/projects", {
+        const response = await fetch("https://api-snap.onrender.com/api/projects", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

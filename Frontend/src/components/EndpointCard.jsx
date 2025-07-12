@@ -30,7 +30,7 @@ const EndpointCard = ({ ep, index, onDelete, projectId, onUpdated }) => {
       // Save test history
       const token = localStorage.getItem("token");
       await fetch(
-        `http://localhost:5000/api/projects/${projectId}/endpoints/${index}/history`,
+        `https://api-snap.onrender.com/api/projects/${projectId}/endpoints/${index}/history`,
         {
           method: "POST",
           headers: {
@@ -56,7 +56,7 @@ const EndpointCard = ({ ep, index, onDelete, projectId, onUpdated }) => {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `http://localhost:5000/api/projects/${projectId}/endpoints/${index}`,
+        `https://api-snap.onrender.com/api/projects/${projectId}/endpoints/${index}`,
         {
           method: "PUT",
           headers: {
