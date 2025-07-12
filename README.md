@@ -62,6 +62,7 @@ cd ../Backend
 npm install
 npm run dev
 
+```bash
 
 Create a .env in the Backend/ folder:
 
