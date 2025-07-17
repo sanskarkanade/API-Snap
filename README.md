@@ -10,7 +10,7 @@
 
 ## 🌐 Live Demo
 
-- 🔗 Frontend: [https://api-snap.vercel.app](https://api-snap.vercel.app)  
+- 🔗 Frontend: [https://api-snap.vercel.app](https://api-snap-sanskarkanades-projects.vercel.app/)  
 - 🔗 Backend: [https://api-snap.onrender.com](https://api-snap.onrender.com)
 
 
