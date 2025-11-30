@@ -21,6 +21,10 @@ const projectSchema = new mongoose.Schema(
         ]
       }
     ],
+    sharedWith: [{
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: "User"},
+      permission: { type: String, default: "view"},
+    }],
 
   },
   { timestamps: true }
