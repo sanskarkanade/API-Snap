@@ -27,7 +27,7 @@ const Home = () => {
     const token = localStorage.getItem("token");
 
     // Fetch shared users
-    const res = await fetch(`http://localhost:5000/api/projects/${projectId}/share`, {
+    const res = await fetch(`https://api-snap.onrender.com/api/projects/${projectId}/share`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -170,7 +170,7 @@ const Home = () => {
     fetchProjects();
   }, []);
 
-  // Replace your entire return (...) block with this version
+  
   return (
     <>
       <Navbar />

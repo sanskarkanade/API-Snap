@@ -19,23 +19,44 @@ exports.createProject = async (req, res) => {
 // GET /api/projects (protected)
 exports.getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.find({ userId: req.user.id });
+    const userId = req.user.id;
+
+    const projects = await Project.find({
+      $or: [
+        { userId: userId },                 // User owns it
+        { "sharedWith.userId": userId }     // User has shared access
+      ]
+    }).sort({ updatedAt: -1 });
+
     res.status(200).json(projects);
   } catch (err) {
-    res.status(500).json({ message: 'Fetch failed', error: err.message });
+    res.status(500).json({ 
+      message: 'Fetch failed', 
+      error: err.message 
+    });
   }
 };
+
 
 // GET /api/projects/:id (protected)
 exports.getProjectById = async (req, res) => {
   try {
-    const project = await Project.findOne({ _id: req.params.id, userId: req.user.id });
-    if (!project) return res.status(404).json({ message: 'Project not found' });
+    const project = await Project.findOne({
+      _id: req.params.id,
+      $or: [
+        { userId: req.user.id },              
+        { "sharedWith.userId": req.user.id }  
+      ]
+    });
+
+    if (!project) return res.status(404).json({ message: "Project not found" });
+
     res.status(200).json(project);
   } catch (err) {
-    res.status(500).json({ message: 'Fetch failed', error: err.message });
+    res.status(500).json({ message: "Fetch failed", error: err.message });
   }
 };
+
 
 // DELETE /api/projects/:id (protected)
 exports.deleteProject = async (req, res) => {
